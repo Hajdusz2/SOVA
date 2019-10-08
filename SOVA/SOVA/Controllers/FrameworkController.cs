@@ -15,6 +15,8 @@ namespace SOVA.Controllers
         [HttpGet]
         public IEnumerable<string> Get()
         {
+            DBConnect.connection.Open();
+            DBConnect.connection.Close();
             return new string[] { "value1", "value2" };
         }
 
