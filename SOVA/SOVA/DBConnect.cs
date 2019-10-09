@@ -8,6 +8,6 @@ namespace SOVA
 {
     public static class DBConnect
     {
-        public static readonly NpgsqlConnection connection = new NpgsqlConnection("Server=localhost; Port=5432; User Id=SOVAAPI; Password=rawdata; Database=stackoverflow");
+        public static readonly String connectionString = "Server=localhost; Port=5432; User Id=SOVAAPI; Password=rawdata; Database=stackoverflow";
     }
 }

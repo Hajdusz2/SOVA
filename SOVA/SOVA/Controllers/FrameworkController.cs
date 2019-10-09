@@ -3,24 +3,30 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Npgsql;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace SOVA.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("Framework")]
     public class FrameworkController : Controller
     {
-        // GET: api/<controller>
         [HttpGet]
-        public IEnumerable<string> Get()
+        public String  Get()
         {
-            DBConnect.connection.Open();
-            DBConnect.connection.Close();
-            return new string[] { "value1", "value2" };
+            NpgsqlConnection connection = new NpgsqlConnection(DBConnect.connectionString);
+            connection.Open();
+
+            NpgsqlCommand test = new NpgsqlCommand("SELECT * FROM words;");
+            test.Connection = connection;
+            var result = test.ExecuteScalar().ToString();
+
+            connection.Close();
+            return result;
         }
 
-        // GET api/<controller>/5
+      /*  // GET api/<controller>/5
         [HttpGet("{id}")]
         public string Get(int id)
         {
@@ -43,6 +49,6 @@ namespace SOVA.Controllers
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
-        }
+        }*/
     }
 }
